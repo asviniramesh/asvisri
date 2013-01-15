@@ -1,0 +1,166 @@
+ <html>
+<head>
+<script src="/assets/livevalidation_standalone.js"></script>
+
+
+<link href="/assets/contact.css.scss" rel="stylesheet" type="text/css" media="screen" />
+</head>
+
+<body>
+
+<center><font color="red"><%=flash[:notice]%></font>
+<%= form_for(:transactions ,:url=>{:action=>'create'}) do |f|%>
+<table width="100%">
+<tr><td width="80%">
+Card Holder First Name*</td><td>
+<%=f.text_field:first_name %></td></tr>
+<tr><td>
+Card Holder Last Name</td><td>
+<%=f.text_field:last_name %></td></tr>
+<tr><td>
+Type of Card*</td><td>
+<%= f.select:type, Transaction::TYPE %></td></tr>
+<tr><td>
+<%val=amount_check(params[:cost][:content_type])%>
+<%=content=params[:cost][:content_type]%>
+<%=content%>
+<input type="hidden" value=<%=content%> name="id"/>
+Amount($)</td><td>
+<%=f.text_field:amount, :value=>val, :readonly=>"true"%></td></tr>
+<tr><td>
+Card number</td><td>
+<%=f.text_field:number %></td></tr>
+<tr><td>
+Expire Date</td><td><%= f.date_select :year,:start_year => 1990,:end_year => 2020,:prompt => :'select',:order =>[:year] %>
+<%= f.date_select :year,:start_year => 1990,:end_year => 2020,:prompt => :'select',:order =>[:month] %></td></tr>
+
+<tr><td >
+Card security code (CVV)*</td><td>
+<%=f.text_field:verification_value%></td></tr>
+<tr><td colspan="2"><center><img src="/assets/card.jpeg"></img></center></td></tr>
+<tr><td colspan="2"><center>
+<%= f.submit"pay"%></center></td></tr></table>
+
+<% end %>
+</body>
+</html>
+<script>
+var f1 = new LiveValidation('transactions_first_name');
+f1.add( Validate.Presence );
+
+var f3 = new LiveValidation('transactions_number');
+f3.add( Validate.Presence );
+f3.add( Validate.Numericality );
+f3.add( Validate.Length, { is: 16 } );
+
+var f12 = new LiveValidation('transactions_verification_value');
+f12.add( Validate.Presence );
+f12.add( Validate.Numericality );
+f12.add( Validate.Length, { is: 3 } );
+
+
+
+</script>
+3:55 PM 
+class CreateTransactions < ActiveRecord::Migration
+def change
+create_table :transactions do |t|
+t.string :first_name
+t.string :last_name
+t.date :month
+t.date :year
+t.integer :verification_value
+t.timestamps
+end
+end
+end
+  
+class Transaction < ActiveRecord::Base
+belongs_to :user
+attr_accessible :type,:number, :month, :amount, :year, :last_name, :verification_value, :first_name
+TYPE=
+{
+:visa=>"VISA",
+:mastercard=>"MASTER CARD",
+:americanexpress=>"AMERICAN EXPRESS"
+}
+end
+47 minutes
+4:43 PM 
+sivamanikandan: class PaymentController < ApplicationController
+before_filter:authenticate_user!
+def index
+
+end
+
+def create
+
+@pay=Transaction.new(params[:transactions]) 
+@pay.user_id=current_user.id
+
+ActiveMerchant::Billing::Base.
+mode = :test
+gateway = ActiveMerchant::Billing::PaypalGateway.new(
+:login => "siva.m_1325821108_biz_api1.gmail.com",
+:password => "1325821145",
+:signature => "AAbpYpWxZon6AzeVejofazbX7nBqAUY9aMAPWga3WMEv8vwpGotsb6NA "
+)
+credit_card = ActiveMerchant::Billing::CreditCard.new(
+:type => "#{params[:transactions][:type]}",
+:number => "#{params[:transactions][:number]}",
+:verification_value => "#{params[:transactions][:verification_value]}",
+:month => "#{Date.today.month}",
+:year =>"#{Date.today.year}",
+:first_name => "#{params[:transactions][:first_name]}",
+:last_name => "#{params[:transactions][:last_name]}"
+
+)
+p credit_card
+@amount="#{params[:transactions][:amount]}"
+if credit_card.valid?
+response = gateway.purchase(@amount.to_i,credit_card,:ip => "127.0.0.1", :billing_address => {
+:name => "sivamanikandan",
+:address1 => "1st main road,3nd cross street,",
+:city => "chennai",
+:state => "Tamilnadu",
+:country => "India",
+:zip => "600097"
+
+} ) 
+if response.success?
+puts "Purchase complete!"
+@pay.status=1
+flash[:notice]="successfully transfered"
+redirect_to "/directory/new/#{params[:id]}"
+else
+puts "Error: #{response.message}"
+flash[:notice]="Transaction could not be loaded please try after some time"
+redirect_to :action=>"alert"
+@pay.status=0
+end
+else
+flash[:notice]="Invalid account"
+
+puts "Error: credit card is not valid. #{credit_card.errors.full_messages.join('. ')}"
+@pay.status=0
+redirect_to "/directory/add_amt"
+end
+@pay.save
+end
+
+end
+4:45 PM 
+4785636150538332
+4:48 PM 
+add_column :transactions,:type,:string
+add_column :transactions,:number,:integer
+add_column :transactions,:amount, :float
+4:49 PM 
+add_column :transactions,:user_id,:integer
+add_column :transactions,:status,:boolean
+
+
+
+sivamanikandan: https://developer.paypal.com/devscr?cmd=_signup-run
+
+

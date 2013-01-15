@@ -1,0 +1,18 @@
+step 1--> add gem
+gem 'recaptcha', :require => 'recaptcha/rails'
+step 2--> add plugin
+rails plugin install git://github.com/ambethia/recaptcha.git
+step 3--> create recaptcha.rb (config/initializer)
+Recaptcha.configure do |config|
+      config.public_key  = '6Ld_rMwSAAAAAFXDOdKXcrtwMUC_W94bDf9OEFU-'
+      config.private_key = '6Ld_rMwSAAAAAL33ggfA35R3YiuVCLroIVoHF5yb'
+    end
+generate key from http://www.google.com/recaptcha
+step 4 ---> add in view file
+<%= recaptcha_tags %>
+step 5--> in controller
+if verify_recaptcha
+  #captcha is valid
+else
+  #captcha is invalid
+end

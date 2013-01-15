@@ -1,0 +1,351 @@
+http://validator.w3.org/check
+
+1)Copy the latest pull app......into your local ......
+
+OPen terminal ::::::::::
+
+Go to the specific location .......
+
+srinivasu@client1:$ cd Desktop
+
+srinivasu@client1:~/Desktop/oysta17$git pull origin master
+
+
+2)open that app........
+
+
+3)open the latest content from old gem file  to new gem file......
+
+group : test do
+
+********
+********
+**********
+********
+********
+ gem 'database_cleaner'
+ gem 'cucumber-rails'
+ gem 'capybara'
+ gem 'email_spec'
+end
+
+4) copy the database.yml in config folder from old app to new app....
+
+5) copy  email-spec (In vendor---->plugins-----) from old app to new app.....
+
+6) rvm use 1.9.2
+
+7) bundle install
+
+8) bundle exec rake db:create RAILS_ENV=test
+
+9) bundle exec rake db:migrate RAILS_ENV=test
+
+10)bundle exec rake db:seed RAILS_ENV=test
+
+{{IMP::::: We need to create feature file ::::::::
+
+bundle exec rails g cucumber:install
+
+It will create feature folder>>}}}}
+
+
+{{IMP:::: In email validation i am not able to see the confirmation mail in my mail id.....
+
+for that i need to run the below command.....
+
+
+bundle exec rake jobs:work 
+
+
+   OR
+
+
+bundle exec rake jobs:work RAILS_ENV=test
+
+
+11)we need to run the server:::::::::
+
+a) bundle exec rails s -e test
+
+b) bundle exec rails s -e test -p 3000
+
+c) bundle exec rails s -e test -p 3001(If we want to run in different server means, change the port number)
+
+
+12)bundle exec cucumber features/featurename.feature
+
+   bundle exec cucumber features
+
+If necessary
+13) For stop the server......
+
+pkill -9 ruby
+
+
+
+********************************************
+
+{gem list ----->we can get all local gem files}
+
+{ip a}
+
+********************************************
+
+Cucumber scripts writing tips:::::::::::::::
+
+********************************************
+
+
+Feature: caremonkey home page
+
+
+Scenario:verify the fields presented in carewmonkey home page header part
+
+
+Given I am in home page
+
+********************************************
+
+
+1) for BUTTON::
+
+	Then I should see "Join now for free(button name)" button
+
+	When I press "Join now for free"
+
+
+2) for existing the test::
+
+	Then I should see "textname"
+
+        Then I fill in "CM_firstname" with "Srinu"
+	
+3) For link::
+
+	Then I should see "Linkname"
+
+        When I follow "linkid"
+
+4)For Radio button:::::
+
+	Then I choose "jobseeker_profile_attributes_is_linkedin_false"
+
+ 	
+5) For Check Box:::::::
+
+   	Then I check ""
+
+
+6) Waiting for page ::::::
+
+	Then I wait for page to load
+
+7) Select specific item from List Box:::::::::::
+
+	Then I select "TAMILNADU" from "INDIA"
+
+
+
+**********************************************************
+ 
+Then /^(?:|I )should see textbox "([^"]*)"$/ do |field|
+    field = find_field(field)
+end
+
+When /^I confirm popup$/ do
+  page.driver.browser.switch_to.alert.accept    
+end ( Pop up ok )
+
+When /^I dismiss popup$/ do
+  page.driver.browser.switch_to.alert.dismiss
+end ( Pop up cancel )
+
+ you can include these steps in websteps.rb file
+
+**********************************************************
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Then /^the selected date for "([^"]*)" should be "([^"]*)"$/ do |field, date|
+  field = field.tr('[', '_')
+  field = field.tr(']', '_')
+  year_field = field + '1i'
+  month_field = field + '2i'
+  day_field = field + '3i'
+
+  date = Date.parse(date)
+
+  field_with_id(year_field).element.search(".//option[@selected = 'selected']").inner_html.should =~ /#{date.year}/
+  field_with_id(month_field).element.search(".//option[@selected = 'selected']").inner_html.should =~ /#{date.strftime('%B')}/
+  field_with_id(day_field).element.search(".//option[@selected = 'selected']").inner_html.should =~ /#{date.day}/
+end
+
+This method is for sample calender click
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+IN LOv project i face "Flash message problem"
+
+
+
+
+we need to install 
+
+gem launchy 
+
+
+
+  for that we need to create debug_steps.rb
+
+   Then /^I debug$/ do
+     breakpoint; 0
+    end
+
+   Then /^I open the page$/ do
+    save_and_open_page
+    end
+
+ Place this in  Step_definitions.rb
+
+ and 
+
+Write step like below
+
+
+Then I open the page
+Then I should see "Account updated!"
+
+  
+
+  Feature: LOV category page
+
+
+Scenario: Validating the fields present in myaccount page
+Given I am in home page
+When I follow "Already a member,sign in"
+Then I fill in "user_email" with "11111@11111.com"
+Then I fill in "user_password" with "123456"
+When I press "Sign in"
+Then I wait for page to load
+Then I should see "My Profile"
+When I follow "My Profile"
+Then I wait for page to load
+
+Then I click change your email
+Then I wait for page to load
+Then I should see "Editing User Email"
+Then I should see "Email"
+Then I should see "Update" button
+When I press "Update"
+Then I should see "Please enter the email"
+Then I fill in "email_check" with "srinu52"
+When I press "Update"
+Then I wait for page to load
+Then I should see "Email address is invalid"
+Then I fill in "email_check" with "ch.srinu52@gamil.com"
+When I press "Update"
+Then I wait for page to load
+Then I open the page
+Then I should see "Account updated!"
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+Some times while running cucumber will throw 
+
+ capaybra:Selenium Driver problem 
+
+
+
+we need to give latest version of cucumber in gemfile.lock
+
+cucumber(1.1.4)
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+for image click
+
+Paste this in login.rb
+
+Then /^I click the image "(.+)"$/ do |image|
+ if page.respond_to? :should
+
+page.find("img[src$='#{image}']").click
+#page.should have_selector("img[src$='#{image}']").click
+else
+assert page.has_selector?("img[src$='#{image}']")
+end
+end
+
+
+use this in script
+
+Then I click the image "here we need to give src of image"
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+for new browser identification
+
+paste the below code in login.rb
+
+
+When /^I choose the second browser$/ do 
+
+page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+
+end
+
+
+use the below line in script
+
+
+When I choose the second browser
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
+for IMage verification  
+
+
+
+Then /^I should see the image "(.+)"$/ do |image|
+  if page.respond_to? :should
+    page.should have_selector("img[src$='#{image}']")
+  else
+    assert page.has_selector?("img[src$='#{image}']")
+  end
+end
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+for popup boxes with out inspect .....
+
+
+When /^I confirm popup$/ do
+  page.driver.browser.switch_to.alert.accept    
+end
+
+When /^I dismiss popup$/ do
+  page.driver.browser.switch_to.alert.dismiss
+end
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+
+alert box text verification 
+
+In websteps.rb
+
+Given /^a confirmation box saying "([^"]*)" should pop up$/ do |message|
+  @expected_message = message
+end
+
+In feature we need to give like this:
+
+Given a confirmation box saying "Select atleast one team to test dele" should pop up

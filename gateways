@@ -1,0 +1,6 @@
+: https://github.com/nbudin/google4r-checkout
+[3:10:10 PM IST] pal: https://github.com/joevandyk/authorize-net
+[3:10:57 PM IST] pal: paypal = >https://www.paypal.com/ipn
+[3:11:59 PM IST] pal: http://opensoul.org/blog/archives/2006/09/16/paypal-ipn-in-rails-with-active-merchant/
+[3:12:35 PM IST] pal: http://activemerchant.rubyforge.org/classes/ActiveMerchant/Billing/Integrations/Paypal/Notification.html
+http://patshaughnessy.net/2010/11/20/how-to-integrate-amazon-simple-pay-into-a-rails-3-app

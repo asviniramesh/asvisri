@@ -1,0 +1,33 @@
+Upload file using carrierwave
+*****************************
+
+Step 1: gem install carrierwave
+        gem "carrierwave"
+
+Step 2: rails g uploader Avatar
+        =>It creates the avatar_uploader.rb in the uploader folder
+        => avatar_uploader.rb is used for to mention where to store the uploaded file in our application and also restrict the content type of the file etc
+
+Step 3: Add the avatar field in the model
+        For Example: Add the avatar field to User model
+        ***********
+           1. rails g migration add_avatar_field_to_user
+           2. In the migration file
+                add_column :users, :avatar, :string
+           3. rake db:migrate
+          
+Step 4 :Add the following in the user model:
+
+        mount_uploader :avatar, AvatarUploader
+        
+Step 5: To call the avatar in the view file
+   
+        Example:
+        *******
+        <%f.file_field :avatar%>
+        
+Step 6:To display the uploded file in the view file
+ 
+       Example:
+       *********
+       <%=link_to "#{@user.avatar.url}", @user.avatar.url%>

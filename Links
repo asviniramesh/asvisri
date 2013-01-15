@@ -1,0 +1,94 @@
+RESTFUL ---------> http://net.tutsplus.com/tutorials/ruby/getting-started-with-restful-authentication-in-rails/
+
+DEVISE ----------> https://github.com/plataformatec/devise,https://github.com/plataformatec/devise/wiki/_pages
+
+BASICS ----------> http://www.fincher.org/tips/Languages/Ruby/
+
+TESTING ---------> http://www.developerfusion.com/article/84444/unit-testing-in-ruby/
+
+TESTING ---------> http://en.wikibooks.org/wiki/Ruby_Programming/Unit_testing
+
+DEVISE ----------> https://github.com/fortuity/rails3-subdomain-devise/wiki/Tutorial-%28walkthrough%29
+
+CAPTCHA----------> https://github.com/galetahub/simple-captcha
+
+FREE TEMPLATES ----> oswdd
+
+http://presentations.royvandewater.com/authentication-with-devise.html#1
+
+JQUERY SLIDERS ----> http://jqueryui.com/demos/slider/#option-value
+
+PAPERCLIPS --------> https://github.com/thoughtbot/paperclip
+
+FACEBOOK API ------> https://developers.facebook.com/apps/195543173876030/summary?save=1
+
+SENDING SMS -------> http://lukeredpath.co.uk/blog/sending-sms-messages-from-your-rails-application.html
+
+FACEBOOK API(GEM) -----> https://github.com/plataformatec/devise/wiki/OmniAuth%3A-Overview
+
+RSS FEED -------> http://stackoverflow.com/questions/3951235/how-do-i-make-an-rss-atom-feed-in-rails-3
+
+PAPERCLIP AND FILEATTACHMENT ----->http://codeabout.wordpress.com/2011/03/08/gem-paperclip-uploading-files-and-pictures-into-your-rails-application
+
+GOOGLE MAP API ------->  http://railsfornovice.wordpress.com/2011/05/24/gmaps-for-rails-3/
+https://github.com/apneadiving/Google-Maps-for-Rails
+add gem version as 1.4.4
+not 0.7.7
+
+PAYPAL ------------------------------->  https://github.com/Shopify/active_merchant
+http://railscasts.com/episodes/144-active-merchant-basics
+
+METHODS TYPE THAT CAN BE CREATED IN MIGRATION ---------> http://api.rubyonrails.org/classes/ActiveRecord/Migration.html
+
+http://ruby.railstutorial.org/chapters/rails-flavored-ruby
+
+http://ruby.railstutorial.org/chapters/rails-3-1
+
+FORMHELPER ---------------------------->http://api.rubyonrails.org/classes/ActionView/Helpers/FormHelper.html
+
+FORMTAG HELPER ------------------------>http://api.rubyonrails.org/classes/ActionView/Helpers/FormTagHelper.html
+
+http://api.rubyonrails.org/classes/ActionView/Helpers/NumberHelper.html
+
+http://api.rubyonrails.org/classes/ActionView/Helpers/TextHelper.html
+
+http://api.rubyonrails.org/classes/ActionView/Helpers/UrlHelper.html and
+http://api.rubyonrails.org/classes/ActionController/Base.html.
+
+REGULAR EXPRESSIONS ------------------->http://strugglingwithruby.blogspot.in/2009/05/regular-expressions-in-ruby.html
+
+PHP MY ADMIN --------------------------> http://localhost/phpmyadmin/
+
+AJAX AND JQUERY------------------------>http://www.roseindia.net/ajax/jquery/
+
+RSPEC----------------->http://blog.emson.co.uk/2008/06/understanding-rspec-stories-a-tutorial/
+
+rubyonrails ---------------> http://www.tutorialspoint.com/ruby-on-rails/rails-quick-guide.htm
+
+RSPEC ------> http://rubydoc.info/gems/rspec-mocks/frames
+
+http://lukeredpath.co.uk/blog/developing-a-rails-model-using-bdd-and-rspec-part-1.html
+
+http://rubydoc.info/github/rspec/rspec-core/frames	
+
+http://www.elevatedcode.com/articles/2007/09/10/testing-controllers-with-rspec/
+
+http://old.rspec.info/rails/writing/controllers.html
+
+http://rubydoc.info/gems/rspec-rails/frames
+
+https://www.relishapp.com/rspec/rspec-rails/v/2-0/docs/helper-specs/helper-spec
+
+http://madhatted.com/2008/7/10/rspec-real-world-testing
+
+user controller/model/spec ----> http://stackoverflow.com/questions/8453442/issues-with-rails-3-1-rspec-and-authlogic
+
+rspec for passwordconfirmation in model -------> http://snippets.dzone.com/posts/show/6976
+
+cucumber --------------------------> http://www.artha42.com/blog/behavior_driven_development_with_cucumber
+
+SELENIUM --------------------------> http://qaselenium.blogspot.in/search/label/Basics%20of%20Automation
+
+REMOTIPART GEM----------------> FILE UPLOAD USING AJAX CALL
+
+http://www.slideshare.net/dykim/javascriptdefinitiveguidestudy-chapter12

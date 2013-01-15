@@ -1,0 +1,18 @@
+  var f1 = new LiveValidation('first_name',{insertAfterWhatNode: 'text_box1'});
+	f1.add(Validate.Presence,{failureMessage: "Please enter first name (2-40 characters)"});
+	f1.add(Validate.Format,{ pattern: "/[a-zA-Z'-]+/",failureMessage: "First name can only contain letters, apostrophe or hyphen."});
+	f1.add(Validate.Length,{minimum: 2,tooShortMessage: "Please enter first name (2-40 characters)" });
+  
+	var f3 = new LiveValidation('email',{insertAfterWhatNode: 'text_box3'});
+  f3.add(Validate.Email,{failureMessage: "Invalid Email address"});	
+	
+	
+		var f2 = new LiveValidation('profile_home_phone',{insertAfterWhatNode: 'text_box1'});
+	f2.add(Validate.Presence,{failureMessage: "Please enter home phone number (up to 15 digits)" });
+
+	f2.add(Validate.Format,{ pattern: /[0-9]/,failureMessage: "Phone number can only contain numbers and '+'" });
+	f2.add(Validate.Numericality, { onlyInteger: true,notANumberMessage: "Phone number can only contain numbers and '+'"});
+	f2.add(Validate.Length,{minimum: 8,tooShortMessage: "Phone number too short! Must be at least 8 digits"});
+	
+		var f8 = new LiveValidation('profile_file',{insertAfterWhatNode: 'text_box7'});
+	f8.add(Validate.Format,{ pattern: /(\.gif|\.jpg|\.jpeg|\.png)/,failureMessage: "Sorry - invalid file type. Please upload a .jpg, .png or .gif" });

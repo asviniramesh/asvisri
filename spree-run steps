@@ -1,0 +1,17 @@
+Inside spree
+
+  Run bundle install ~
+
+Inside sandbox
+   
+  bundle install ~
+
+  bundle exec rake db:create
+
+  bundle exec rake spree:install
+
+  bundle exec rake db:migrate
+
+  bundle exec rake db:seed
+
+  bundle exec rake db:sample

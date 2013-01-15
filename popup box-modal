@@ -1,0 +1,57 @@
+<script type= "text/javascript" src="jquery.simplemodal-1.4.2-1.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#pop_up_add,#pop_up_add1").click(function(){
+      $("#pop_up_box").modal( {opacity:80,
+	overlayCss: {backgroundColor:"#000"}
+});
+    });
+		
+		 $("#pop_up_edit,#pop_up_edit1").click(function(){
+      $("#pop_up_box1").modal( {opacity:80,
+	overlayCss: {backgroundColor:"#000"}
+});
+    });
+    
+      $('.cancalbottonmid, .close_botton_box').click(function(){
+      $.modal.close();
+    });
+		});
+		</script>
+		<div id = "pop_up_box" style= "position:absolute; left: 100px; display:none">
+					<%= render :partial=> "add_carer" %>
+	</div>
+<div id = "pop_up_box1" style="position:absolute; left: 100px; display:none">
+					<%= render :partial=> "edit_carer" %>
+	</div>
+    
+    
+     <div class="edit_box"><img src="/images/add_icon.png" width="10" height="10"  border="0"  class="edit_image"/><a href="#" id = "pop_up_add" >Add</a></div></div>
+     
+     
+     
+     see this also
+     
+     
+     
+     <div id = "checking">
+dsdfsdfsd
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("#myForm").click(function(){
+    alert("hi");
+      $("#checking").modal(  {opacity:20,
+	overlayCss: {backgroundColor:"#F0FFFF"}
+});
+
+    });
+		
+		});
+</script>
+
+     
+     
+     
+     

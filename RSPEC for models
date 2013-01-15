@@ -1,0 +1,131 @@
+sample code rspec controller:
+-----------------------------
+
+    before(:each) do
+        @question = "Define vote"
+        @answer = "express one's perference for a candidate"
+    end
+        
+    it "should question and answer redirect to the show page" do
+        post :admin_new, :question => @question, :answer => @answer
+        response.should redirect_to(:controller => "post", :action => "admin_show")
+        response.code.should eq("302")
+    end
+        
+    it "should question and answer create successfully means redirect to the index page" do
+        post :admin_create
+        blog = Blog.create(:id => 1,:question => "What is our national flower",:answer => "lotus", :created_at => "",:updated_at => "")
+        response.should render_template(:controller => "post", :action => "admin_new")
+                   response.should be_successful
+    end
+        
+    it "should update the created Sample application record" do
+        question = "Define vote"
+        answer = "Express one's perference for a candidate"
+        response.code.should eq("200")
+    end
+        
+    it "should update the Record's" do
+        blog = Blog.update_attribute(:id => 1,:question => "What is our national animal",:answer => "lion", :created_at => "",:updated_at => "") rescue nil
+        response.should be_success
+    end 
+end    
+=================
+
+
+On Sat, Jan 7, 2012 at 7:00 PM, Anupriya D <anu.d@railsfactory.org> wrote:
+https://github.com/thoughtbot/shoulda - refer this for validation
+
+And use rake db:migrate && rake db:test:prepare ->to create a test db.
+
+Sample controller:
+------------------
+
+
+def dashboard
+@features_deals=Deal.featured_deals
+ @child = Child.find(:first,:conditions=>["user_id=?",current_user.id])
+ @cashout = ChildCashout.new
+end
+
+Sample Controller for spec:
+---------------------------
+
+describe ChildrenController do
+
+  describe "dashboard" do
+    it "should be successful" do
+      get 'dashboard'
+       @child=Factory(:child)
+         @cashout = ChildCashout.new
+      end
+    end
+end
+
+
+On Sat, Jan 7, 2012 at 5:48 PM, Anupriya D <anu.d@railsfactory.org> wrote:
+Hi All,
+
+Ref Sites:
+---------
+
+ http://relishapp.com/rspec
+
+ http://rubydoc.info/gems/rspec-rails/frames
+
+Required Gems and Installation Steps:
+------------------------------------
+
+1.Add the below gems in Gem file 
+
+  gem "capybara" 
+
+  gem 'rspec'
+
+  gem 'rspec-rails'
+
+  gem "shoulda"
+
+            
+ 3) bundle install ~           
+              
+ 4) rails g rspec:install => It will create a spec folder .
+
+ 5) rspec spec => for running the spec 
+
+ 6) To run all the spec use rake spec command
+ 
+ 7)To run particular model bundle exec rspec spec/models/model_name similarly for controller/views/helpers.
+
+Sample code for model:
+----------------------
+
+    has_many :attachments
+    has_many :payments
+    has_many :comments
+    has_one :child
+    has_one :parent
+    has_one :gaurdian
+
+
+  validates :first_name,:presence=>{:message=>"Please enter your First Name"}
+  validates :last_name,:presence=>{:message=>"Please enter your Last Name"}
+
+Sample code for model spec:
+---------------------------
+
+  it { should have_one(:child) }
+  it { should have_one(:parent) }
+  it { should have_one(:gaurdian) }
+  it { should have_many(:attachments) }
+  it { should have_many(:payments) }
+  it { should have_many(:comments) }
+  it { should validate_presence_of(:email)}
+  it { should validate_presence_of(:password)}
+  it { should validate_presence_of(:first_name).with_message("Please enter your First Name")}
+  it { should validate_presence_of(:last_name).with_message("Please enter your Last Name")}
+
+Regards,
+Anu
+
+
